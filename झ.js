@@ -62,6 +62,7 @@ var tspan = 1500;
 var lineMC = new Path.Line(
     {x: view.center.x + ln/4 - ln/40, y: view.center.y + ln/4},
     {x: view.center.x + ln/2 + ln/4, y: view.center.y + ln/4});
+lineMC.strokeWidth = 4.5;
 // lineMC.scale(0.6, 1);
 // var refc = new Path.Circle({x: view.center.x + ln/2 + ln/4, y: view.center.y}, 20);
 // var t1 = group.tween(8000)
@@ -105,5 +106,5 @@ lineTop.style = {
     strokeCap: 'butt'
 }
 
-// var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
-// window.location.href=image; 
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+window.location.href=image; 
