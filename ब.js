@@ -98,6 +98,7 @@ const rollAndClimb = (path, tspan) => {
               'rotation': -180
           }, tspan/2);  
     })
+    return t;
 }
 
 const returnToOrig = (path, tpan) => {
@@ -105,6 +106,7 @@ const returnToOrig = (path, tpan) => {
         {
             'rotation': 0
         }, tspan)
+    return t;
 }
 
 lineTop.applyMatrix = false;
@@ -112,44 +114,45 @@ lineR.applyMatrix = false;
 
 
 // then circle of hell 
-shake(lineR, 10, tspan)
-shake(lineTop, 20, tspan)
-var t2 = lineTop.tween(tspan)
-t2.then(function() {
+Promise.resolve()
+.then(() => {
+    shake(lineR, 10, tspan)
+    var t2 = shake(lineTop, 20, tspan)
+    return t2;
+})
+.then(function() {
     
     console.log('first shake over')
     
-    var t3 = roll(pGroup, new Point(0, ln/2 + ln/4), tspan)
+    var t3 = roll(pGroup, new Point(ln*2.8, ln/2 + ln/4), tspan)
     shake(lineR, 10/6, tspan/6)
     shake(lineTop, 20/6, tspan/6)
-    
-    // t3.then(function() {
-        
-    //     pGroup.position = new Point(25, view.center.y + ln/2 + ln/4)
-    //     shake(lineR, 10, tspan)
-    //     var t4 = shake(lineTop, 20, tspan)
-        
-    //     t4.then(function() {
-    //         console.log('second shake over')
-            
-    //         var t5 = roll(pGroup, new Point(ln*2.8, ln/2 + ln/4), tspan)
-    //         shake(lineR, 10/6, tspan/6)
-    //         shake(lineTop, 20/6, tspan/6)
-            
-    //         t5.then(function() {
-                
-    //             shake(lineR, 10, tspan)
-    //             var t6 = shake(lineTop, 20, tspan)
-    //             t6.then(function() {
-    //                 rollAndClimb(pGroup, tspan*2)
-    //                 // console.log(lineTop.rotation);
-    //                 // console.log(lineR.rotation);
-    //                 returnToOrig(lineR, tspan)
-    //                 returnToOrig(lineTop, tspan)
-    //             })
-    //         })
-    //     })
-    // })
+    return t3;
 })
-
-
+.then(function() {
+        
+    pGroup.position = new Point(25, view.center.y + ln/2 + ln/4)
+    shake(lineR, 10, tspan)
+    var t4 = shake(lineTop, 20, tspan)
+    return t4;
+})
+.then(function() {
+    console.log('second shake over')
+    
+    var t5 = roll(pGroup, new Point(ln*2.8, ln/2 + ln/4), tspan)
+    shake(lineR, 10/6, tspan/6)
+    shake(lineTop, 20/6, tspan/6)
+    return t5;
+})
+.then(function() {
+    shake(lineR, 10, tspan)
+    var t6 = shake(lineTop, 20, tspan)
+    return t6;
+})
+.then(function() {
+    rollAndClimb(pGroup, tspan*2)
+    // console.log(lineTop.rotation);
+    // console.log(lineR.rotation);
+    returnToOrig(lineR, tspan)
+    returnToOrig(lineTop, tspan)
+})
