@@ -1,10 +1,10 @@
 SplineFontDB: 3.2
-FontName: DevanagariPaper
-FullName: DevanagariPaper
-FamilyName: DevanagariPaper
+FontName: Untitled2
+FullName: Untitled2
+FamilyName: Untitled2
 Weight: Regular
 Copyright: Copyright (c) 2021, anushka
-UComments: "2021-8-11: Created with FontForge (http://fontforge.org)"
+UComments: "2021-8-12: Created with FontForge (http://fontforge.org)"
 Version: 001.000
 ItalicAngle: 0
 UnderlinePosition: -100
@@ -15,12 +15,12 @@ InvalidEm: 0
 LayerCount: 2
 Layer: 0 0 "Back" 1
 Layer: 1 0 "Fore" 0
-XUID: [1021 972 -75117810 5186117]
+XUID: [1021 972 -75117810 7098375]
 OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
-CreationTime: 1628667056
-ModificationTime: 1628755750
+CreationTime: 1628757221
+ModificationTime: 1628758278
 OS2TypoAscent: 0
 OS2TypoAOffset: 1
 OS2TypoDescent: 0
@@ -35,7 +35,6 @@ HheadAOffset: 1
 HheadDescent: 0
 HheadDOffset: 1
 OS2Vendor: 'PfEd'
-MarkAttachClasses: 1
 DEI: 91125
 Encoding: UnicodeFull
 UnicodeInterp: none
@@ -44,6 +43,4 @@ DisplaySize: -48
 AntiAlias: 1
 FitToEm: 0
 WinInfo: 2320 10 2
-BeginPrivate: 0
-EndPrivate
 EndSplineFont
