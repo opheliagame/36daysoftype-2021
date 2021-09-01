@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>36 days of challenge @opheliagame</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="libs/paper.js"></script>
+  
+  <script type="text/javascript" canvas="canvas" id="papertest">
+    var scope
+    
+    window.onload = () => executePaper('./font/m1src/क.js')
+    
+    const executePaper = (fileName) => {
+      fetch(fileName)
+      .then(response => response.text())
+      .then(data => {
+        if(scope) scope.remove()
+        scope = new paper.PaperScope()
+        scope.setup('canvas')
+        scope.execute(data)
+      })
+    }
+
+  </script>
+  <script type="text/javascript" canvas="canvas" id="paperjs"></script>
+</head>
+<body>
+  <div>
+    <label for="letter-type">Select the letter type: </label>
+    <select name="letter" id="letter-type">
+      <option value="moving">moving</option>
+      <option value="master1" selected="selected">master1</option>
+      <option value="master2">master2</option>
+    </select>
+  </div>
+  <div>
+    <label for="letter-select">Select the letter to display: </label>
+    <select name="letter" id="letter-select">
+    </select>
+  </div>
+
+  <canvas 
+    style="background-color: white;"
+    width="600px"
+    height="600px"
+    id="canvas" 
+    >
+
+  </canvas>
+
+
+  <script>
+    let letterData = {}
+    const letterSelect = document.getElementById('letter-select')
+    const letterType = document.getElementById('letter-type')
+
+    const files = fetch('./data.json')
+      .then(response => response.json())
+      .then(data => letterData = data)
+      .then(() => {
+        const selectNode = document.getElementById('letter-select')
+        // population in beginning
+        console.log(letterType.value)
+        letterData[letterType.value].forEach(element => {
+          let optionNode = document.createElement('option')
+          optionNode.value = element
+          optionNode.innerText = element
+          selectNode.appendChild(optionNode)
+        });
+      })
+
+    letterSelect.addEventListener('change', () => {
+      const fileName = letterSelect.value
+      executePaper(fileName)
+    })
+
+    letterType.addEventListener('change', () => {
+      const options = letterData[letterType.value]
+      letterSelect.innerHTML = ''
+      options.forEach(element => {
+        let optionNode = document.createElement('option')
+        optionNode.value = element
+        optionNode.innerText = element
+        letterSelect.appendChild(optionNode)
+      });
+    })
+
+    
+  </script>
+</body>
+</html>

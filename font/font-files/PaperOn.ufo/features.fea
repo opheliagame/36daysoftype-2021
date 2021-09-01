@@ -1,0 +1,13 @@
+
+#Mark attachment classes (defined in GDEF, used in lookupflags)
+
+@GDEF_Simple = [\uni0915 \uni0916 \uni0917 \uni0918 \uni0919 \uni091A \uni091B 
+	\uni091C \uni091D \uni091E \uni091F \uni0920 \uni0921 \uni0922 \uni0923 \uni0924 
+	\uni0925 \uni0926 \uni0927 \uni0928 \uni092A \uni092B \uni092C \uni092D \uni092E 
+	\uni092F \uni0930 \uni0932 \uni0935 \uni0936 \uni0937 \uni0938 \uni0939 \uni0914 ];
+
+table GDEF {
+  GlyphClassDef @GDEF_Simple, , , ;
+
+} GDEF;
+

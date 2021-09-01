@@ -1,5 +1,6 @@
 StartChar: uni0932
 Encoding: 2354 2354 27
+GlifName: uni0932
 Width: 357
 VWidth: 0
 Flags: HW
@@ -48,4 +49,5 @@ SplineSet
  -30.85546875 627.838867188 l 2
  -36.17578125 627.838867188 -40.623046875 623.391601562 -40.623046875 618.071289062 c 0
 EndSplineSet
+Validated: 524325
 EndChar
