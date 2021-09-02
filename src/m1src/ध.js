@@ -140,3 +140,7 @@ var tspan = 6000;
 //     var norm = arc1.getNormalAt(0)*r;
 //     circ.position = arc1.firstSegment.point + norm;
 // }
+var letterPath = new CompoundPath({
+    children: [arc1, arc2, arc3, circ, lineR, lineTop]
+})
+window.letterPath = letterPath

@@ -33,7 +33,7 @@ var leftLine = new Path([
     {x: view.center.x - ln, y: view.center.y},
     {x: view.center.x - ln/4 - ln*3/8, y: view.center.y + ln/2},
     {x: view.center.x - ln/4, y: view.center.y + ln}]);
-leftLine.visible = false;
+// leftLine.visible = false;
 var bottomArc = new Path.Arc(
     {x: view.center.x - ln, y: view.center.y},
     {x: view.center.x - ln/4, y: view.center.y + ln*3/4},
@@ -53,6 +53,7 @@ var lineTop = new Path.Line(
 var tspan = 1000;
 // console.log(bottomArc.segments);
 bottomArc.segments[1].point = bottomArc.getPointAt(bottomArc.length/2);
+bottomArc.visible = false
 var slope = leftLine.firstSegment.point - leftLine.lastSegment.point;
 
 var hand = new Path.Line(
@@ -60,20 +61,26 @@ var hand = new Path.Line(
     rightLine.getPointAt(rightLine.length*0.4));
 var handC = hand.clone();
 handC.lastSegment.point = new Point(107, hand.firstSegment.point.y);
-handC.visible = false;
+handC.lastSegment.point = leftArc.getIntersections(handC)[0].point
+// handC.visible = false;
 
-const stand = (tspan) => {
-    var t1 = bottomArc.tween(
-    {
-        'firstSegment.handleOut': new Point(0, 0),
-        'segments[1].point': leftLine.segments[1].point,
-        'segments[1].handleIn': slope*0.5,
-        'segments[1].handleOut': slope*-0.5,
-        'lastSegment.point': leftLine.lastSegment.point,
-        'lastSegment.handleIn': new Point(0, 0)
-    }, tspan/2)
-    return t1;
-}
+var letterPath = new CompoundPath({
+    children: [leftArc, leftLine, rightLine, handC, lineTop]
+})
+window.letterPath = letterPath
+
+// const stand = (tspan) => {
+//     var t1 = bottomArc.tween(
+//     {
+//         'firstSegment.handleOut': new Point(0, 0),
+//         'segments[1].point': leftLine.segments[1].point,
+//         'segments[1].handleIn': slope*0.5,
+//         'segments[1].handleOut': slope*-0.5,
+//         'lastSegment.point': leftLine.lastSegment.point,
+//         'lastSegment.handleIn': new Point(0, 0)
+//     }, tspan/2)
+//     return t1;
+// }
 const swingAroundPoint = (path, rotP, sdeg, edeg, amp, tspan) => {
     var t = path.tween(tspan)
     t.onUpdate = function(event) {
@@ -113,43 +120,43 @@ const move = (path, seg, target, start, tspan) => {
 
 
 
-Promise.resolve()
-.then(() => stand(tspan*3))
-.then(() => swingAroundPoint(leftArc, leftLine.firstSegment.point, 0.5, 0.5+5.5, 4, tspan*3))
-.then(() => {
-    var left = new Group([leftArc, bottomArc]);
-    lineTop.bringToFront();
+// Promise.resolve()
+// .then(() => stand(tspan*3))
+// .then(() => swingAroundPoint(leftArc, leftLine.firstSegment.point, 0.5, 0.5+5.5, 4, tspan*3))
+// .then(() => {
+//     var left = new Group([leftArc, bottomArc]);
+//     lineTop.bringToFront();
     
-    move(hand, hand.lastSegment, left.children[0], true, tspan*2);
-    return swingAroundPoint(left, leftLine.lastSegment.point, 0.5, 0.5+1, 0.3, tspan*2)
-})
-.then(() => {
-    var left = new Group([leftArc, bottomArc]);
-    lineTop.bringToFront();
-    move(hand, hand.lastSegment, left.children[0], false, tspan*2);
-    // swingAroundPoint(left.children[0], leftLine.firstSegment.point, 0.5, 0.5+5.5, 4, tspan*3)
-    return swingAroundPoint(left, leftLine.lastSegment.point, -0.5, -0.5+1, 0.3, tspan*2)
-})
-.then(() => {
-    move(hand, hand.lastSegment, leftArc, false, tspan);
-    return swingAroundPoint(leftArc, leftLine.firstSegment.point, 0.5, -0.5, 1, tspan)
-})
-.then(() => {
-    var left = new Group([leftArc, bottomArc]);
-    var lPos = left.position;
-    // var full = new Group([leftArc, bottomArc, hand, rightLine]);
-    lineTop.bringToFront();
+//     move(hand, hand.lastSegment, left.children[0], true, tspan*2);
+//     return swingAroundPoint(left, leftLine.lastSegment.point, 0.5, 0.5+1, 0.3, tspan*2)
+// })
+// .then(() => {
+//     var left = new Group([leftArc, bottomArc]);
+//     lineTop.bringToFront();
+//     move(hand, hand.lastSegment, left.children[0], false, tspan*2);
+//     // swingAroundPoint(left.children[0], leftLine.firstSegment.point, 0.5, 0.5+5.5, 4, tspan*3)
+//     return swingAroundPoint(left, leftLine.lastSegment.point, -0.5, -0.5+1, 0.3, tspan*2)
+// })
+// .then(() => {
+//     move(hand, hand.lastSegment, leftArc, false, tspan);
+//     return swingAroundPoint(leftArc, leftLine.firstSegment.point, 0.5, -0.5, 1, tspan)
+// })
+// .then(() => {
+//     var left = new Group([leftArc, bottomArc]);
+//     var lPos = left.position;
+//     // var full = new Group([leftArc, bottomArc, hand, rightLine]);
+//     lineTop.bringToFront();
     
-    move(hand, hand.lastSegment, left.children[0], false, tspan);
-    move(hand, hand.firstSegment, rightLine, false, tspan);
-    var dist = ln/12;
-    left.tween(
-        {
-            'position': lPos + new Point(dist, 0)
-        }, tspan)
-    rightLine.tween(
-        {
-            'position': rightLine.position + new Point(-dist, 0)
-        }, tspan)
-})
-.catch((e) => console.log(e));
+//     move(hand, hand.lastSegment, left.children[0], false, tspan);
+//     move(hand, hand.firstSegment, rightLine, false, tspan);
+//     var dist = ln/12;
+//     left.tween(
+//         {
+//             'position': lPos + new Point(dist, 0)
+//         }, tspan)
+//     rightLine.tween(
+//         {
+//             'position': rightLine.position + new Point(-dist, 0)
+//         }, tspan)
+// })
+// .catch((e) => console.log(e));

@@ -63,3 +63,7 @@ var lineTop = new Path.Line(
             {x: view.center.x - ln -ln/8 , y: view.center.y - ln},
             {x: view.center.x + ln +ln/8, y: view.center.y - ln}
             )
+var letterPath = new CompoundPath({
+    children: [lineR, hlineL, arc1, arc2, lineTop]
+})
+window.letterPath = letterPath

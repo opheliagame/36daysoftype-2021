@@ -111,3 +111,7 @@ var tspan = 8000;
 //     // arc5.lastSegment.point = arc4.lastSegment.point;
 //     // arc5.firstSegment.point = origLast + new Point(Math.sin(angle+Math.PI/1.8)*ln/30, Math.sin(angle+Math.PI)*ln/30);
 // }
+var letterPath = new CompoundPath({
+    children: [lineR, arc2, arc3, arc4, arc5, lineTop]
+})
+window.letterPath = letterPath

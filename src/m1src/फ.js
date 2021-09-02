@@ -62,6 +62,7 @@ var midCurve = new Path([
         new Point(ln/12, -ln/6)),
     arcTR.segments[1], arcTR.segments[2]])
 // midCurve.strokeColor = 'red'
+midCurve.visible = false;
 
 var lineTop = new Path.Line(
             {x: view.center.x - ln - ln/4, y: view.center.y - ln},
@@ -92,6 +93,12 @@ refarc2.visible = false;
 // drawC(arcBL.firstSegment.point + new Point(Math.cos(radians(-45))*xDist, Math.sin(radians(-45))*yDist), 20)
 // drawC(arcTL.lastSegment.point, 20)
 
+arcTL.lastSegment.point = refarc1.lastSegment.point
+arcTL.lastSegment.handleIn = new Point(0, 0)
+arcTL.segments[1].point =  refarc1.lastSegment.point + new Point(0, ln/2)
+arcTL.segments[1].handleIn = new Point(0, ln/4),
+arcTL.segments[1].handleOut = new Point(0, -ln/4)
+
 // animations
 var tspan = 3000
 // arcTL.tween(
@@ -111,52 +118,57 @@ var tspan = 3000
 
 
     
-var t1 = arcTL.tween({
-    duration: tspan,
-    easing: 'easeInOutQuart'
+// var t1 = arcTL.tween({
+//     duration: tspan,
+//     easing: 'easeInOutQuart'
+// })
+// var off1 = 0, off2 = 0;
+// var handleLength = arcBL.firstSegment.handleOut.y
+// var arcC = arcTL.clone({insert: false})
+// var handle1 = arcC.lastSegment.handleIn
+// var handle2 = arcC.segments[1].handleIn
+// var handle3 = arcC.segments[1].handleOut
+// t1.onUpdate = function(event) {
+//     var times = tspan/1000 * 62;
+//     var angle = map(event.factor, 0, 1, 0, Math.PI*0.5);
+//     var amp = 1;
+    
+//     var cp1 = refarc1.getPointAt(off1);
+//     var norm1 = refarc1.getNormalAt(off1);
+//     var f1 = Math.abs(Math.sin(angle))*refarc1.length;
+//     // drawC(cp1, 10);
+//     // drawL(cp1, cp1+norm1*10);
+//     off1 = f1;
+    
+//     arcTL.lastSegment.point = cp1;
+//     arcTL.lastSegment.handleIn = norm1 + handle1.normalize()*handleLength;
+    
+//     var cp2 = refarc2.getPointAt(off2);
+//     var norm2 = refarc2.getNormalAt(off2);
+//     var f2 = Math.abs(Math.sin(angle))*refarc2.length;
+//     // drawC(cp2, 10);
+//     // drawL(cp2, cp2+norm2*10);
+//     off2 = f2;
+    
+//     arcTL.segments[1].point = cp2;
+//     arcTL.segments[1].handleIn = norm2*-1 + handle2.normalize()*handleLength;
+//     arcTL.segments[1].handleOut = norm2 + handle3.normalize()*handleLength;
+
+//     arcTL.smooth({
+//         type: 'geometric',
+//         factor: 0.6
+//     });
+    
+//     handleLength -= 0.21
+    
+//     var lineTop = new Path.Line(
+//             {x: view.center.x - ln - ln/4, y: view.center.y - ln},
+//             {x: view.center.x + ln + ln/4, y: view.center.y - ln}
+//             )
+
+// }
+
+var letterPath = new CompoundPath({
+    children: [lineMid, arcTL, arcTR, arcBL, arcBR, lineTop]
 })
-var off1 = 0, off2 = 0;
-var handleLength = arcBL.firstSegment.handleOut.y
-var arcC = arcTL.clone({insert: false})
-var handle1 = arcC.lastSegment.handleIn
-var handle2 = arcC.segments[1].handleIn
-var handle3 = arcC.segments[1].handleOut
-t1.onUpdate = function(event) {
-    var times = tspan/1000 * 62;
-    var angle = map(event.factor, 0, 1, 0, Math.PI*0.5);
-    var amp = 1;
-    
-    var cp1 = refarc1.getPointAt(off1);
-    var norm1 = refarc1.getNormalAt(off1);
-    var f1 = Math.abs(Math.sin(angle))*refarc1.length;
-    // drawC(cp1, 10);
-    // drawL(cp1, cp1+norm1*10);
-    off1 = f1;
-    
-    arcTL.lastSegment.point = cp1;
-    arcTL.lastSegment.handleIn = norm1 + handle1.normalize()*handleLength;
-    
-    var cp2 = refarc2.getPointAt(off2);
-    var norm2 = refarc2.getNormalAt(off2);
-    var f2 = Math.abs(Math.sin(angle))*refarc2.length;
-    // drawC(cp2, 10);
-    // drawL(cp2, cp2+norm2*10);
-    off2 = f2;
-    
-    arcTL.segments[1].point = cp2;
-    arcTL.segments[1].handleIn = norm2*-1 + handle2.normalize()*handleLength;
-    arcTL.segments[1].handleOut = norm2 + handle3.normalize()*handleLength;
-
-    arcTL.smooth({
-        type: 'geometric',
-        factor: 0.6
-    });
-    
-    handleLength -= 0.21
-    
-    var lineTop = new Path.Line(
-            {x: view.center.x - ln - ln/4, y: view.center.y - ln},
-            {x: view.center.x + ln + ln/4, y: view.center.y - ln}
-            )
-
-}
+window.letterPath = letterPath

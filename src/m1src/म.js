@@ -52,33 +52,38 @@ var lineTop = new Path.Line(
 
 var stand = new Group([lineR, lineTop]);
 
+var letterPath = new CompoundPath({
+    children: [line1, line2, curv1, curv2, lineR, lineTop]
+})
+window.letterPath = letterPath
 
-var beforeAnim = {
-    "note1": {
-        "pos": note1.position,
-        "rot": -180
-    },
-    "note2": {
-        "pos": note2.position,
-        "rot": -90
-    },
-    "stand": {
-        "pos": stand.position,
-        "rot": 0
-    }
-};
+
+// var beforeAnim = {
+//     "note1": {
+//         "pos": note1.position,
+//         "rot": -180
+//     },
+//     "note2": {
+//         "pos": note2.position,
+//         "rot": -90
+//     },
+//     "stand": {
+//         "pos": stand.position,
+//         "rot": 0
+//     }
+// };
 
 // stand.position.y += ln*1.5;
 // note1.rotate(180)
 // note2.rotate(90);
-var diff1 = line1.firstSegment.point.y - note1.position.y;
-var diff2 = line2.lastSegment.point.y - note2.position.y;
+// var diff1 = line1.firstSegment.point.y - note1.position.y;
+// var diff2 = line2.lastSegment.point.y - note2.position.y;
 // note1.position.y = lineR.firstSegment.point.y - diff1 - 8;
 // note2.position.y = lineR.firstSegment.point.y - diff2 - 8;
 // note2.position.x += ln/3;
 
 // animations
-var tspan = 300
+// var tspan = 300
 const up = (path, xdist, ydist, tspan) => {
     path.applyMatrix = false;
     var fy = path.position.y - ydist;
@@ -128,9 +133,9 @@ const returnToOrig = (path, pathName, tspan) => {
 
 // drawC(getHitPoint(note2, curv1), 10);
 // drawC(curv1.position, 10)
-var note2Pos = note2.position;
-var note1Pos = note1.position;
-var yh = ln/2;
+// var note2Pos = note2.position;
+// var note1Pos = note1.position;
+// var yh = ln/2;
 
 // Promise.resolve()
 // .then(() => up(note2, 40, yh, tspan))

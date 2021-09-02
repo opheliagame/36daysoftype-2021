@@ -7,27 +7,10 @@
   <title>36 days of challenge @opheliagame</title>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+  <script type="text/javascript" src="https://unpkg.com/acorn"></script>
   <script type="text/javascript" src="libs/paper.js"></script>
-  
-  <script type="text/javascript" canvas="canvas" id="papertest">
-    var scope
-    
-    window.onload = () => executePaper('./font/m1src/क.js')
-    
-    const executePaper = (fileName) => {
-      fetch(fileName)
-      .then(response => response.text())
-      .then(data => {
-        if(scope) scope.remove()
-        scope = new paper.PaperScope()
-        scope.setup('canvas')
-        scope.execute(data)
-      })
-    }
+  <script src="https://unpkg.com/paperjs-offset@1.0.8/dist/paperjs-offset.js"></script>
 
-  </script>
-  <script type="text/javascript" canvas="canvas" id="paperjs"></script>
 </head>
 <body>
   <div>
@@ -43,18 +26,29 @@
     <select name="letter" id="letter-select">
     </select>
   </div>
+  <div>
+    <a style="cursor: pointer; border: 1px solid black;" onclick="saveSVG(this)">Save SVG</a>
+  </div>
 
-  <canvas 
-    style="background-color: white;"
-    width="600px"
-    height="600px"
-    id="canvas" 
-    >
-
-  </canvas>
+  <div style="display: flex;">
+    <canvas
+      style="background-color: white;"
+      width="600px"
+      height="600px"
+      id="canvas"
+      >
+    </canvas>
+    <div id="svg"></div>
+  </div>
 
 
   <script>
+    function getBlobURL(content, type) {
+      return URL.createObjectURL(new Blob([content], {
+        type: type
+      }));
+    }
+
     let letterData = {}
     const letterSelect = document.getElementById('letter-select')
     const letterType = document.getElementById('letter-type')
@@ -90,7 +84,59 @@
       });
     })
 
+    const saveSVG = (element) => {
+      console.log('saving..')
+      let loc = ''
+      switch(letterType.value) {
+        case 'moving': 
+          loc =  './font/Moving/'
+          break
+        case 'master1':
+          loc = './font/Master1/'
+          break
+        case 'master2':
+          loc = './font/Master2/'
+          break
+      }
+      
+      const fileLoc = letterSelect.value.split('/').reverse()[0]
+      var svg = scope.project.exportSVG({ asString: true });
+			element.href = getBlobURL(svg, 'image/svg+xml');
+			element.download = fileLoc.split('.')[0] + '.svg'
+    }
+  </script>
+
+  <script type="text/javascript" canvas="canvas" id="papertest">
+    var scope
     
+    window.onload = () => executePaper('./src/m1src/क.js')
+    const svgNode = document.getElementById('svg')
+    
+    const executePaper = (fileName) => {
+      fetch(fileName)
+      .then(response => response.text())
+      .then(data => {
+        if(scope) scope.remove()
+        scope = new paper.PaperScope()
+        scope.setup('canvas')
+        scope.execute(data)
+        var strokePath = PaperOffset.offsetStroke(
+            letterPath,
+            10,
+            { cap: 'butt' }
+        );
+        strokePath.fillColor = 'transparent';
+        strokePath.strokeColor = 'blue';
+        strokePath.strokeWidth = 0;
+        letterPath.visible = false;
+
+        var svg = scope.project.exportSVG()
+        svgNode.innerHTML = ''
+        svgNode.appendChild(svg)
+      })
+
+    }
+
   </script>
 </body>
 </html>

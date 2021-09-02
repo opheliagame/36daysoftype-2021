@@ -104,3 +104,7 @@ var lineTop = new Path.Line(
 //         })
 //     })
 // })
+var letterPath = new CompoundPath({
+    children: [lineR, lineM, arc, lineTop]
+})
+window.letterPath = letterPath

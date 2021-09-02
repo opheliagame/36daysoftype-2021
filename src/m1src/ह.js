@@ -60,8 +60,8 @@ group.addChildren([lineh1, arc1, lineh2, arc2, arc3]);
 group.scale(0.9, 0.9, new Point(group.position.x, view.center.y - ln))
 
 
-var lip1 = new Group([lineh1, arc1, lineh2]);
-var lip2 = new Group([lineh2.clone(), arc3]);
+// var lip1 = new Group([lineh1, arc1, lineh2]);
+// var lip2 = new Group([lineh2.clone(), arc3]);
 // lip1.strokeColor = 'blue';
 // lip2.strokeColor = 'violet';
 
@@ -69,6 +69,11 @@ var lineTop = new Path.Line(
         {x: view.center.x - ln+ln/6, y: view.center.y - ln},
         {x: view.center.x + ln-ln/6, y: view.center.y - ln})
 
+
+var letterPath = new CompoundPath({
+    children: [line1, lineh1, arc1, lineh2, arc2, arc3, lineTop]
+})
+window.letterPath = letterPath
 
 // animations 
 var rot2 = arc2.firstSegment.point;
@@ -141,14 +146,14 @@ const smoothen = (path, tspan) => {
 
 // lineh2.selected = true;
 // lineh1.selected = true;
-lip2.children[0].removeSegment(1);
-lip1.addChild(new Path.Line(lineh2.lastSegment.point, line1.lastSegment.point))
-lip1.closed = true;
+// lip2.children[0].removeSegment(1);
+// lip1.addChild(new Path.Line(lineh2.lastSegment.point, line1.lastSegment.point))
+// lip1.closed = true;
 // lip1.fillColor = 'black';
-lip1.fillRule = 'evenodd';
+// lip1.fillRule = 'evenodd';
 // lip1.selected = true;
-lip1.lastChild.visible = false;
-lip1.shadowColor = 'red';
+// lip1.lastChild.visible = false;
+// lip1.shadowColor = 'red';
 
 var tspan = 4000;
 // Promise.resolve()

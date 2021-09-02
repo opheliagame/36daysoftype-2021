@@ -93,3 +93,7 @@ group.addChild(lineTop);
 //     ]);
     
 // curve.smooth();
+var letterPath = new CompoundPath({
+    children: [line1, lineh1, arc1, lineh2, arc2, lineh3, rect, lineTop]
+})
+window.letterPath = letterPath

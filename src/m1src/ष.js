@@ -56,8 +56,8 @@ var arc = new Path.Arc(
     diag.lastSegment.point);
 var trailPath = new CompoundPath();
 trailPath.addChildren([leftL, arc]);
-trailPath.visible = false;
 trailPath = new Path(trailPath.pathData);
+trailPath.visible = false;
 // trailPath.strokeColor = 'red';
 // trailPath.visible = false;
 // for(let i = 0; i < trailPath.segments.length; i++) {
@@ -76,6 +76,11 @@ var lineTop = new Path.Line(
 var spider = new Group([sLeg, leg1, leg2, sLegOpp, leg3, leg4, sBody]);
 spider.position = view.center + new Point(-ln/2, -ln);    
 spider.rotate(180);
+
+var letterPath = new CompoundPath({
+    children: [leftL, arc, lineR, diag, lineTop]
+})
+window.letterPath = letterPath
 
 // animations 
 var tspan = 8000;

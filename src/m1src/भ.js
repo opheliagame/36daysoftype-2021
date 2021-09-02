@@ -49,9 +49,14 @@ var lineTop = new Path.Line(
     {x: view.center.x , y: view.center.y - ln},
     {x: view.center.x + ln+ln/8, y: view.center.y - ln})
 
+var letterPath = new CompoundPath({
+    children: [lineR, specs, line1, line2, curv, lineTop]
+})
+window.letterPath = letterPath
+
 
 // pre animation setup
-var full = new Group([lineR, specs, line1, line2, curv, lineTop]);
+// var full = new Group([lineR, specs, line1, line2, curv, lineTop]);
 // full.strokeColor = 'blue';
 // specs.position = lineR.firstSegment.point + new Point(-ln/4, -r-8);
 const makeHand = () => {
@@ -131,8 +136,8 @@ const turn2 = (path, tspan) => {
 
 // console.log(typeof jump(full, -ln/5, ln/4, tspan/2))
 // jump(full, -ln/5, ln/4, tspan/2)
-var tspan = 1000
-var yh = ln/6;
+// var tspan = 1000
+// var yh = ln/6;
 // Promise.resolve()
 // .then(() => jump(full, -ln/5, yh, tspan/3))
 // .then(() => jump(full, -ln/5, yh, tspan/3))

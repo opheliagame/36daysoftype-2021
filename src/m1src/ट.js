@@ -5,7 +5,7 @@ project.currentStyle = {
     strokeCap: 'butt'
 }
 
-const radians = function(degrees) {
+var radians = function(degrees) {
 	return degrees * Math.PI / 180;
 }
 var ln = 150;
@@ -110,3 +110,7 @@ var lineTopR = new Path.Line(
         
 //     })
 // })
+var letterPath = new CompoundPath({
+    children: [lineR, arc1, arc2, lineTopL, lineTopR]
+})
+window.letterPath = letterPath

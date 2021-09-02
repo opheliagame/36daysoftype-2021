@@ -7,14 +7,15 @@ Copyright: Copyright (c) 2021, anushka
 UComments: "2021-8-11: Created with FontForge (http://fontforge.org)"
 Version: 001.000
 ItalicAngle: 0
-UnderlinePosition: -100
-UnderlineWidth: 50
-Ascent: 800
-Descent: 200
+UnderlinePosition: 0
+UnderlineWidth: 0
+Ascent: 48
+Descent: 16
 InvalidEm: 0
-LayerCount: 2
+LayerCount: 3
 Layer: 0 0 "Back" 1
 Layer: 1 0 "Fore" 0
+Layer: 2 0 "Back 2" 1
 XUID: [1021 972 -75117810 5186117]
 StyleMap: 0x0000
 FSType: 0
@@ -22,12 +23,12 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1628667056
-ModificationTime: 1630420421
+ModificationTime: 1630585111
 OS2TypoAscent: 0
 OS2TypoAOffset: 1
 OS2TypoDescent: 0
 OS2TypoDOffset: 1
-OS2TypoLinegap: 90
+OS2TypoLinegap: 6
 OS2WinAscent: 0
 OS2WinAOffset: 1
 OS2WinDescent: 0
@@ -44,7 +45,7 @@ NameList: AGL For New Fonts
 DisplaySize: -48
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 2320 10 2
+WinInfo: 2214 27 9
 BeginPrivate: 0
 EndPrivate
 EndSplineFont

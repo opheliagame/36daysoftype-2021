@@ -5,22 +5,22 @@ project.currentStyle = {
     strokeCap: 'butt'
 }
 
-const radians = function(degrees) {
+var radians = function(degrees) {
 	return degrees * Math.PI / 180;
 }
-const degrees = function(radians) {
+var degrees = function(radians) {
     return radians * 180 / Math.PI;
 }
-const drawC = function(point, radius) {
+var drawC = function(point, radius) {
     var refc = new Path.Circle(point, radius);
     refc.strokeWidth = 1;
     refc.strokeColor = 'red';
 } 
-const drawL = function(point1, point2) {
+var drawL = function(point1, point2) {
     var refl = new Path.Line(point1, point2);
     return refl;
 }
-const map = function(number, inMin, inMax, outMin, outMax) {
+var map = function(number, inMin, inMax, outMin, outMax) {
     return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
 
@@ -108,3 +108,7 @@ pathArc2.visible = false;
 //     off1 += step1;
 //     off2 += step2;
 // }
+var letterPath = new CompoundPath({
+    children: [lineR, hlineL, arc1, tail, lineTop]
+})
+window.letterPath = letterPath 

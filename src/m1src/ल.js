@@ -48,8 +48,13 @@ arcL.scale(1.2, 1, arcR.lastSegment.point);
 var lineTop = new Path.Line(
     {x: view.center.x - ln-ln/8, y: view.center.y - ln},
     {x: view.center.x + ln+ln/8, y: view.center.y - ln})
-lineTop.applyMatrix = false; 
+// lineTop.applyMatrix = false; 
+// arcR.strokeColor = 'red'
 
+var letterPath = new CompoundPath({
+    children: [lineR, arc1, arc2, arcR, lineTop]
+})
+window.letterPath = letterPath
 
 // animations
 const turn1 = (path, hor=true, rotp=null, tspan) => {
@@ -78,33 +83,33 @@ const turn2 = (path, hor=true, rotp=null, tspan) => {
     return tw;
 }
 
-const tap = (path, xdist, tspan) => {
-    var t = path.tween(tspan)
-    var prev = lineTop.position;
-    t.onUpdate = function(event) {
-        var times = tspan/1000 * 61;
-        var angle = map(event.factor, 0, 1, 0, Math.PI*10);
-        var move = map(angle, 0, Math.PI*2, -1, 1);
-        // path.lastSegment.point = pos + new Point(Math.sin(angle)*xdist, 0)
-        path.shear(Math.sin(angle)*0.01, 0, arc1.firstSegment.point)
-        // lineTop.position.x = Math.max(prev.x, arc2.lastSegment.point.x + lineTop.length/2)
-        prev = lineTop.position
-    }
+// const tap = (path, xdist, tspan) => {
+//     var t = path.tween(tspan)
+//     var prev = lineTop.position;
+//     t.onUpdate = function(event) {
+//         var times = tspan/1000 * 61;
+//         var angle = map(event.factor, 0, 1, 0, Math.PI*10);
+//         var move = map(angle, 0, Math.PI*2, -1, 1);
+//         // path.lastSegment.point = pos + new Point(Math.sin(angle)*xdist, 0)
+//         path.shear(Math.sin(angle)*0.01, 0, arc1.firstSegment.point)
+//         // lineTop.position.x = Math.max(prev.x, arc2.lastSegment.point.x + lineTop.length/2)
+//         prev = lineTop.position
+//     }
     
-    // var pos = lineTop.position;
-    var t2 = lineTop.tween(
-        {
-            'position.x': arc2.lastSegment.point.x + lineTop.length/2
-        }, tspan/10)
-    return t;
-}
+//     // var pos = lineTop.position;
+//     var t2 = lineTop.tween(
+//         {
+//             'position.x': arc2.lastSegment.point.x + lineTop.length/2
+//         }, tspan/10)
+//     return t;
+// }
 
-const final = (tspan) => {
-    lineTop.tween( 
-        {
-            'position': view.center + new Point(0, -ln)
-        }, tspan)
-}
+// const final = (tspan) => {
+//     lineTop.tween( 
+//         {
+//             'position': view.center + new Point(0, -ln)
+//         }, tspan)
+// }
 
 
 var tspan = 1000

@@ -37,6 +37,7 @@ var arc2 = new Path.Arc(
     arc1.segments[4].point,
     lineR.getPointAt(lineR.length/2) + new Point(ln/64, 0),
     arc1.segments[0].point)
+arc2.visible = false;
 // arc1.fillColor = 'black'
 // arc2.fillColor = 'black';
 var lineM = new Path.Line(
@@ -50,6 +51,11 @@ var lineTop = new Path.Line(
             {x: view.center.x - ln + ln/12, y: view.center.y - ln},
             {x: view.center.x + ln - ln/12, y: view.center.y - ln}
             )
+
+var letterPath = new CompoundPath({
+    children: [lineR, arc1, lineTop]
+})
+window.letterPath = letterPath
 
 // animations
 const shake = (path, degree, tspan) => {

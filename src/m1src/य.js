@@ -54,6 +54,11 @@ var origPos = under.position;
 //     leftArc.lastSegment.point)
 // rightLine.lastSegment.point = bottomArc.lastSegment.point;
 
+var letterPath = new CompoundPath({
+    children: [leftArc, bottomArc, rightLine, lineTop]
+})
+window.letterPath = letterPath
+
 // animations
 var tspan = 1500
 var bubbles = [];

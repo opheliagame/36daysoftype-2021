@@ -94,3 +94,7 @@ var topG = new Group([lineV, lineTop]);
 //     //     }
 //     // })
 // })
+var letterPath = new CompoundPath({
+    children: [lineV, circle, lineTop]
+})
+window.letterPath = letterPath

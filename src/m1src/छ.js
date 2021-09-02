@@ -44,3 +44,7 @@ var lineTop = new Path.Line(
             )
 
 // lineTop.opacity = 0;
+var letterPath = new CompoundPath({
+    children: [lineR, ellR, arc1, arc2, arc3, lineTop]
+})
+window.letterPath = letterPath

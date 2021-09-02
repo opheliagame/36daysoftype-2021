@@ -16,13 +16,13 @@ var leftLine = new Path([
     {x: view.center.x - ln/4 - ln*3/8, y: view.center.y + ln/2},
     {x: view.center.x - ln/4, y: view.center.y + ln}
     ]);
-// leftLine.visible = false;
+leftLine.visible = false;
 var bottomArc = new Path.Arc(
     {x: view.center.x - ln, y: view.center.y},
     {x: view.center.x - ln/4, y: view.center.y + ln*3/4},
     {x: view.center.x + ln*3/4, y: view.center.y + ln/2}
     );
-bottomArc.visible = false;
+// bottomArc.visible = false;
     
 var rightLine = new Path.Line(
     {x: view.center.x + ln*3/4, y: view.center.y - ln},
@@ -38,4 +38,8 @@ var lineTop = new Path.Line(
             {x: view.center.x + ln+ln/8, y: view.center.y - ln}
             )
 
+var letterPath = new CompoundPath({
+    children: [leftArc, bottomArc, rightLine, rightArc, lineTop]
+})
+window.letterPath = letterPath
 

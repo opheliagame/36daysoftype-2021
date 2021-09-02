@@ -106,3 +106,7 @@ var lineTop = new Path.Line(
 // // .then(() => anim(0.06))
 // // .then(() => anim(0.07))
 // .catch((e) => console.log(e))
+var letterPath = new CompoundPath({
+    children: [lineR, beakBottom, beakTop, lineTop]
+})
+window.letterPath = letterPath

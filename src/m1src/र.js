@@ -54,7 +54,10 @@ var lineTop = new Path.Line(
 // lineTop.position = view.center - new Point(ln, ln/2)
 // lineTop.visible = false;
 
-
+var letterPath = new CompoundPath({
+    children: [leftArc, leftLine, lineTop]
+})
+window.letterPath = letterPath
 
 // animations
 const jump = (path, xdist, ydist, dir, tspan) => {

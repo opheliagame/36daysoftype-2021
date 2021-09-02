@@ -52,6 +52,13 @@ lineL.visible = false;
 lineLC.visible = false;
 lineR.visible = false;
 lineRC.visible = false;
-// lineMid.style = thinStyle;
+
+var letterGroup = new Group([arcTL, arcBL, arcTR, arcBR, lineTop, lineMid])
+var letterPath = new CompoundPath({
+    children: [
+        arcTL, arcBL, arcTR, arcBR, lineTop, lineMid
+    ]
+})
+window.letterPath = letterPath
 
     

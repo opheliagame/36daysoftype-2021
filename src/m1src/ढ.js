@@ -5,10 +5,10 @@ project.currentStyle = {
     strokeCap: 'butt'
 }
 
-const radians = function(degrees) {
+var radians = function(degrees) {
 	return degrees * Math.PI / 180;
 }
-const drawC = function(point, radius) {
+var drawC = function(point, radius) {
     var refc = new Path.Circle(point, radius);
     refc.strokeWidth = 1;
     refc.strokeColor = 'red';
@@ -66,6 +66,8 @@ var fullArc = new Path(compArc.pathData);
 // console.log(fullArc);
 // fullArc.strokeColor = 'red';
 fullArc.closed = false;
+arc2.visible = false;
+arc3.visible = false;
 // drawC(fullArc.getPointAt(0), 20);
 
 // animations
@@ -138,3 +140,7 @@ var lineTop = new Path.Line(
             {x: view.center.x - ln - ln/8, y: view.center.y - ln},
             {x: view.center.x + ln + ln/8, y: view.center.y - ln}
             )
+var letterPath = new CompoundPath({
+    children: [lineR, fullArc, circ, lineTop]
+})
+window.letterPath = letterPath
